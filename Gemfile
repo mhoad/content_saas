@@ -35,6 +35,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
+  gem 'guard-rspec', require: false
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -43,5 +47,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  
+  #Setup growl notifications for Guard 
+  gem 'growl' if `uname` =~ /Darwin/
 end
 
