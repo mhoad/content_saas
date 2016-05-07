@@ -1,0 +1,14 @@
+<div id='sidebar' class='col-md-4'>
+  <% if owner? %>
+    <ul>
+      <li><%= link_to "Add Website", new_website_path %></li>
+     <!-- <li> link_to "Invite User", new_invitation_path </li> -->
+    </ul>
+  <% end %>
+</div>
+<h2>Websites</h2>
+<ul>
+  <% @websites.each do |website| %>
+    <li><%= link_to website.url, website %></li>
+  <% end %>
+</ul>

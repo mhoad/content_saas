@@ -43,6 +43,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
+  gem "launchy"
 end
 
 group :development do
@@ -54,5 +55,9 @@ group :development do
   
   #Setup growl notifications for Guard 
   gem 'growl' if `uname` =~ /Darwin/
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 
