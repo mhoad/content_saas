@@ -42,6 +42,7 @@ group :development, :test do
   gem 'capybara'
   gem 'guard-rspec', require: false
   gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
 end
 
 group :development do
