@@ -5,5 +5,6 @@ class Account < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   accepts_nested_attributes_for :owner
   
+  has_many :invitations
   has_many :websites
 end

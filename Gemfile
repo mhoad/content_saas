@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'devise'
 
+#For background job processing. Prob swap out to Sidekiq later
+gem 'sucker_punch'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -59,5 +62,6 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'email_spec'
 end
 
