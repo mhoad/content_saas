@@ -1,14 +1,13 @@
 <div class='row'>
   <div class='content col-md-offset-4 col-md-4'>
     <h2>Accepting an invitation</h2>
-
-    You are accepting an invitation to join the <%= @invitation.account.name %>.
-    
-    <%= simple_form_for [:accepted, @invitation], as: :user do |f| %>
-      <%= f.input :email, value: @invitation.email, required: true, as: :email %>
-      <%= f.input :password, autofocus: true, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation, required: true %>
-      <%= f.submit "Accept Invitation", class: "btn btn-primary" %>
+    <p>
+      You are accepting an invitation to join the <%= @invitation.account.name %>.
+    </p>
+    <% if !user_signed_in? %>
+      <%= render "anonymous_accept" %>
+    <% else %>
+      <%= render "user_accept" %>
     <% end %>
   </div>
 </div>

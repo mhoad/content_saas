@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :invitation do
-    email "test@example.com"
-    #account nil
+    sequence(:email) { |n| "newuser#{n}@example.com" }
     association :account, :factory => :account
   end
 end
