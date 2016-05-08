@@ -58,12 +58,5 @@ module Accounts
       # Make sure the invitation link can't be used again in the future
       invitation.delete
     end
-    
-    def authorize_owner!
-      unless owner?
-        flash[:alert] = "Only an owner of an account can do that."
-        redirect_to root_url(subdomain: current_account.subdomain)
-      end
-    end
   end
 end
