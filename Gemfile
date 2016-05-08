@@ -55,9 +55,11 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  
-  #Setup growl notifications for Guard 
+
+  #Setup growl notifications for Guard
   gem 'growl' if `uname` =~ /Darwin/
+
+  gem 'rails_best_practices'
 end
 
 group :test do

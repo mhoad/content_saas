@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
     @account = Account.new
     @account.build_owner
   end
-  
+
   def create
     @account = Account.new(account_params)
     if @account.save
@@ -14,9 +14,8 @@ class AccountsController < ApplicationController
       flash.now[:alert] = "Sorry, your account could not be created."
       render :new
     end
-    
   end
-  
+
   private
     def account_params
       params.require(:account).permit(:name, :subdomain,

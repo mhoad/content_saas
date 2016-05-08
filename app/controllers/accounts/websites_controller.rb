@@ -1,10 +1,9 @@
 module Accounts
   class WebsitesController < Accounts::BaseController
     before_action :set_website, only: [:show, :edit, :update, :destroy]
-    
+
     def index
       @websites = current_account.websites
-      # @websites = Website.all
     end
 
     def new
@@ -42,7 +41,7 @@ module Accounts
     def destroy
       @website = Website.find(params[:id])
       @website.destroy
-      
+
       flash[:notice] = "Website has been deleted."
 
       redirect_to websites_path
