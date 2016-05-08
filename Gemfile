@@ -60,6 +60,7 @@ group :development do
   gem 'growl' if `uname` =~ /Darwin/
 
   gem 'rails_best_practices'
+  gem 'brakeman'
 end
 
 group :test do

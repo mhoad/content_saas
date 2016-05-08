@@ -30,8 +30,8 @@ module Accounts
 
     def update
       if @website.update(website_params)
-        flash[:notice] = "Website successfully updated"
-        redirect_to @website
+        flash[:notice] = "Website successfully updated."
+        redirect_to website_path(@website.id)
       else
         flash[:alert] = "Unable to edit website."
         render "edit"

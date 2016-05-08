@@ -7,8 +7,24 @@
   <% end %>
 </div>
 <h2>Websites</h2>
-<ul>
-  <% @websites.each do |website| %>
-    <li><%= link_to website.url, website %></li>
-  <% end %>
-</ul>
+<table>
+  <tbody>
+    <tr>
+      <td>Website</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% @websites.each do |website| %>
+      <tr>
+        <td><%= link_to website.url, website %></td>
+        <td><%= link_to "Edit", edit_website_path(website) %></td>
+        <td>
+          <%= link_to "Remove", website_path(website),
+            method: :delete,
+            data: { confirm: "Are you sure you want to remove this user?" },
+            class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
