@@ -18,11 +18,11 @@ module Accounts
     end
     
     def accept
-      @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find_by!(token: params[:id])
     end
     
     def accepted
-      @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find_by!(token: params[:id])
       user_params = params[:user].permit(
         :email,
         :password,
@@ -37,7 +37,7 @@ module Accounts
         redirect_to root_url(subdomain: current_account.subdomain)
       else
         flash[:alert] = "There was an error creating your account."
-        redirect_to (accept_invitation_path(@invitation.id, @user))
+        redirect_to (accept_invitation_path(@invitation.token, @user))
       end  
     end
     
