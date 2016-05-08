@@ -1,6 +1,8 @@
 module Accounts
   class InvitationsController < Accounts::BaseController
-    before_action :authorize_owner!
+    skip_before_action :authenticate_user!, only: [:accept, :accepted]
+    skip_before_action :authorize_user!, only: [:accept, :accepted]
+    before_action :authorize_owner!, except: [:accept, :accepted]
     
     def new
       @invitation = Invitation.new
@@ -13,6 +15,30 @@ module Accounts
       InvitationEmailJob.perform_later(@invitation.id)
       flash[:notice] = "#{@invitation.email} has been invited."
       redirect_to root_url
+    end
+    
+    def accept
+      @invitation = Invitation.find(params[:id])
+    end
+    
+    def accepted
+      @invitation = Invitation.find(params[:id])
+      user_params = params[:user].permit(
+        :email,
+        :password,
+        :password_confirmation
+      )
+      @user = User.new(user_params)
+      if @user.save
+        current_account.users << @user
+        sign_in(@user)
+
+        flash[:notice] = "You have joined the #{current_account.name} account."
+        redirect_to root_url(subdomain: current_account.subdomain)
+      else
+        flash[:alert] = "There was an error creating your account."
+        redirect_to (accept_invitation_path(@invitation.id, @user))
+      end  
     end
     
     private

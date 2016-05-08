@@ -30,6 +30,7 @@ feature "Inviting Users" do
     
     email = find_email("test@example.com")
     expect(email).to be_present
+    
     expect(email.subject).to eq("Invitation to join #{account.name}")
   end
 end
