@@ -20,16 +20,19 @@ module Accounts
     def accept
       store_location_for(:user, request.fullpath)
       @invitation = Invitation.find_by!(token: params[:id])
+      rescue ActiveRecord::RecordNotFound
+        flash[:notice] = "It appears as though that invitation code has already been used."
+        redirect_to (root_url subdomain: nil)
     end
     
     def accepted
       @invitation = Invitation.find_by!(token: params[:id])
       if user_signed_in?
-        successful_signup(current_user)
+        successful_signup(current_user, @invitation)
       else
         @user = User.new(user_params)
         if @user.save
-          successful_signup(@user)
+          successful_signup(@user, @invitation)
         else
           flash[:alert] = "There was an error creating your account."
           redirect_to (accept_invitation_path(@invitation.token, @user))
@@ -47,11 +50,13 @@ module Accounts
       params[:user].permit(:email, :password, :password_confirmation)
     end
     
-    def successful_signup(user)
+    def successful_signup(user, invitation)
       sign_in(user)
       current_account.users << user
       flash[:notice] = "You have joined the #{current_account.name} account."
       redirect_to root_url(subdomain: current_account.subdomain)
+      # Make sure the invitation link can't be used again in the future
+      invitation.delete
     end
     
     def authorize_owner!

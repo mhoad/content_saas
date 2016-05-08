@@ -40,9 +40,7 @@ feature "Accepting invitations" do
     expect(page.current_url).to eq(accept_invitation_url(id: invitation.token, subdomain: invitation.account.subdomain))
   end
   
-  scenario "accepts an invitation as an existing user" do
-    InvitationMailer.invite(invitation).deliver_now
-    
+  scenario "accepts an invitation as an existing user" do    
     set_subdomain(invitation.account.subdomain)
     open_email(invitation.email)
     accept_link = links_in_email(current_email).first
@@ -61,5 +59,23 @@ feature "Accepting invitations" do
     click_button "Accept Invitation"
     expect(page).to have_content("You have joined the #{invitation.account.name} account.")
     expect(page.current_url).to eq(root_url)
+  end
+  
+  scenario "doesn't allow same invitation to be used twice" do
+    open_email(invitation.email)
+    accept_link = links_in_email(current_email).first
+    expect(accept_link).to be_present
+    
+    visit accept_link
+    
+    fill_in "user[password]", with: "password"
+    fill_in "user[password_confirmation]", with: "password"
+    click_button "Accept Invitation"
+    click_link "Sign out"
+    
+    visit accept_link
+    
+    expect(page).to have_content("It appears as though that invitation code has already been used.")
+    expect(page.current_url).to eq(root_url subdomain: nil)
   end
 end
