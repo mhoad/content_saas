@@ -8,7 +8,7 @@ case Rails.env
 when "development", "test"
   options.merge!(domain: "lvh.me")
 when "production"
-  #TBA
+  #options.merge!(domain: "whateveryourdomainis.com")
 end
 
 Rails.application.config.session_store :cookie_store, options
