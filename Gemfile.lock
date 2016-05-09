@@ -53,6 +53,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cliver (0.3.2)
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.1)
@@ -132,7 +133,7 @@ GEM
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    money (6.7.0)
+    money (6.7.1)
       i18n (>= 0.6.4, <= 0.7.0)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.0)
@@ -146,6 +147,11 @@ GEM
       shellany (~> 0.0)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    poltergeist (1.9.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -300,6 +306,7 @@ DEPENDENCIES
   launchy
   money
   pg
+  poltergeist
   rails (= 5.0.0.rc1)
   rails_best_practices
   rspec-rails

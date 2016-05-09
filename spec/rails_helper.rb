@@ -5,6 +5,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require "email_spec"
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -54,4 +55,10 @@ RSpec.configure do |config|
   
   #Ensure that Capybara is able to use subdomains correctly
   Capybara.app_host = "http://lvh.me"
+  
+  #Make sure we give the tests enough time to actually run
+  Capybara.default_max_wait_time = 20
+  
+  #Use poltergeist to ensure we can execute JS
+  Capybara.javascript_driver = :poltergeist
 end

@@ -71,5 +71,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'email_spec'
   gem 'database_cleaner'
+  gem 'poltergeist'
 end
 
