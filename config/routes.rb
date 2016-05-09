@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   constraints(SubdomainRequired) do
     scope module: "accounts" do
       root to: "websites#index", as: :account_root
+      get "/account/choose_plan", to: "plans#choose", as: :choose_plan
+      patch "/account/choose_plan", to: "plans#chosen"
       resources :websites
       resources :invitations, only: [:new, :create] do
         member do

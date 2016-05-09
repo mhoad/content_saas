@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :plan do
-    name "MyString"
-    amount 1
-    stripe_id "MyString"
+    name "Starter"
+    amount 995
+    stripe_id "starter"
   end
 end

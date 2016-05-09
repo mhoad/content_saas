@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508234818) do
+ActiveRecord::Schema.define(version: 20160509004748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "owner_id"
     t.string   "subdomain"
+    t.string   "stripe_customer_id"
+    t.integer  "plan_id"
     t.index ["owner_id"], name: "index_accounts_on_owner_id", using: :btree
+    t.index ["plan_id"], name: "index_accounts_on_plan_id", using: :btree
     t.index ["subdomain"], name: "index_accounts_on_subdomain", using: :btree
   end
 
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160508234818) do
     t.index ["account_id"], name: "index_websites_on_account_id", using: :btree
   end
 
+  add_foreign_key "accounts", "plans"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
