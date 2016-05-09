@@ -7,6 +7,7 @@ FactoryGirl.define do
     trait :subscribed do
       stripe_customer_id "123ABC"
       stripe_subscription_id "ABC123"
+      association :plan, :factory => :plan
     end
   end
 end

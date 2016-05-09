@@ -42,6 +42,7 @@ class Accounts::PlansController < Accounts::BaseController
     current_account.update_column(:plan_id, plan.id)
 
     flash[:notice] = "You have changed to the #{plan.name} plan."
-    redirect_to root_url
+    return_to = session.delete(:return_to)
+    redirect_to return_to || root_url
   end
 end

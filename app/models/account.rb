@@ -14,4 +14,8 @@ class Account < ActiveRecord::Base
   def subscribed?
     stripe_subscription_id.present?
   end
+  
+  def over_limit_for?(plan)
+    websites.count > plan.websites_allowed
+  end
 end

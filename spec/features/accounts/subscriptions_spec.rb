@@ -63,4 +63,40 @@ feature "Subscriptions" do
       expect(page).to have_content("You have changed to the Silver plan.")
     end
   end
+  
+  scenario "is prompted to upgrade plan when over limit" do
+    starter_plan = Plan.create!(
+      name: "Starter",
+      stripe_id: "starter",
+      websites_allowed: 1,
+    )
+
+    silver_plan = Plan.create!(
+      name: "Silver",
+      stripe_id: "silver",
+      websites_allowed: 3
+    )
+
+    account.plan = starter_plan
+ 
+    account.websites << FactoryGirl.create(:website, :no_account)
+    account.save
+
+    visit root_url
+    click_link "Add Website"
+
+    within(".alert") do
+      message = "You have reached your plan's limit." + 
+        " You need to upgrade your plan to add more websites."
+      expect(page).to have_content(message)
+    end
+
+    click_button "choose_silver"
+
+    within(".alert") do
+      expect(page).to have_content("You have changed to the Silver plan.")
+    end
+
+    expect(page.current_url).to eq(new_website_url)
+  end
 end
