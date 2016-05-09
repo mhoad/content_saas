@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Inviting Users" do
   include ActiveJob::TestHelper
   
-  let(:account) { FactoryGirl.create(:account) }
+  let(:account) { FactoryGirl.create(:account, :subscribed) }
   
   before do
     set_subdomain(account.subdomain)

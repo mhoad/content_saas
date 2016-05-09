@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe "Switching accounts" do
-  let(:account_1) { FactoryGirl.create(:account) }
-  let(:account_2) { FactoryGirl.create(:account) }
+  let(:account_1) { FactoryGirl.create(:account, :subscribed) }
+  let(:account_2) { FactoryGirl.create(:account, :subscribed) }
 
   before do
     account_2.users << account_1.owner
