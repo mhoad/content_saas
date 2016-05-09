@@ -36,8 +36,9 @@ RSpec.describe Accounts::PlansController, :type => :controller do
     context "with 3 books" do
       it "cannot switch to the starter plan" do
         expect(Stripe::Customer).not_to receive(:retrieve)
-
-        put :switch, plan_id: starter_plan.id
+        
+        put :switch, params: { plan_id: starter_plan.id }
+        
         expect(flash[:alert]).to eq(
           "You cannot switch to that plan." +
           " Your account is over that plan's limit.")
