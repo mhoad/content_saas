@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get "/account/choose_plan", to: "plans#choose", as: :choose_plan
       patch "/account/choose_plan", to: "plans#chosen"
       delete "/account/cancel", to: "plans#cancel", as: :cancel_subscription
+      put "/accounts/switch_plan", to: "plans#switch", as: :switch_plan
       
       resources :websites
       resources :invitations, only: [:new, :create] do

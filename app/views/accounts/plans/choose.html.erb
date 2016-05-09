@@ -6,19 +6,13 @@
       <em>Plans are billed monthly.</em>
       <hr>
 
-      <%= simple_form_for(current_account, url: choose_plan_url) do |account| %>
-        <% @plans.each do |plan| %>
-          <%= account.radio_button :plan_id, plan.id, data: { name: plan.name, amount: plan.amount } %>
-          <%= account.label "plan_id_#{plan.id}", plan.name %> 
-          (<%= money(plan.amount) %>) <br>
-        <% end %>
-        <%= account.submit "Pay", class: "btn btn-primary", id: "checkout-btn" %>
+      <% if current_account.subscribed? %>
+        <%= render "plan_switcher" %>
+      <% else %>
+        <%= render "plan_picker" %>
       <% end %>
-
-      <script src="https://checkout.stripe.com/checkout.js"></script>
-      <%= javascript_include_tag "accounts/plans" %>
-    
     </div>
+    
     <% if current_account.stripe_subscription_id.present? %>
       <hr>
       <div class='text-center text-danger'>
@@ -33,5 +27,7 @@
         </small>
       </div>
     <% end %>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <%= javascript_include_tag "accounts/plans" %>
   </div>
 </div>
