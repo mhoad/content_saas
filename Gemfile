@@ -29,6 +29,9 @@ gem 'devise'
 #For background job processing. Prob swap out to Sidekiq later
 gem 'sucker_punch'
 
+#Payments
+gem 'stripe'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
