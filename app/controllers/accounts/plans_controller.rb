@@ -34,6 +34,15 @@ class Accounts::PlansController < Accounts::BaseController
   
   def switch
     plan = Plan.find(params[:plan_id])
+
+    if current_account.over_limit_for?(plan)
+      flash[:alert] = "You cannot switch to that plan." +
+        " Your account is over that plan's limit."
+      redirect_to choose_plan_path
+      return
+    end
+
+    plan = Plan.find(params[:plan_id])
     customer = Stripe::Customer.retrieve(current_account.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(current_account.stripe_subscription_id)
     subscription.plan = plan.stripe_id

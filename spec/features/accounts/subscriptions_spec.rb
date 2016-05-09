@@ -46,7 +46,8 @@ feature "Subscriptions" do
     silver_plan = Plan.create(
       name: "Silver",
       stripe_id: "silver",
-      amount: 1500)
+      amount: 1500,
+      websites_allowed: 3)
 
     visit root_url
     click_link "Change Plan"
