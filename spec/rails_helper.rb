@@ -57,7 +57,7 @@ RSpec.configure do |config|
   Capybara.app_host = "http://lvh.me"
   
   #Make sure we give the tests enough time to actually run
-  Capybara.default_max_wait_time = 20
+  Capybara.default_max_wait_time = 40
   
   #Use poltergeist to ensure we can execute JS
   Capybara.javascript_driver = :poltergeist

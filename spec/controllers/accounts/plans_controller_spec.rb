@@ -25,8 +25,7 @@ RSpec.describe Accounts::PlansController, :type => :controller do
       allow(controller).to receive(:current_user).and_return(account.owner)
       allow(controller).to receive(:current_account).and_return(account)
 
-      account.plan = silver_plan
-      # account.websites << FactoryGirl.create_list(:website, 3) 
+      account.plan = silver_plan 
       account.websites << FactoryGirl.create_list(:website, 5, :no_account)
       
       

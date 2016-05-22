@@ -3,6 +3,7 @@ module Accounts
     before_action :authenticate_user!
     before_action :authorize_user!
     before_action :subscription_required!
+    before_action :active_subscription_required!
 
     protect_from_forgery with: :exception, prepend: true
 
@@ -42,6 +43,20 @@ module Accounts
         flash[:alert] = message
         redirect_to choose_plan_url
       end
+    end
+
+    def active_subscription_required!
+      return if current_account.stripe_subscription_id.blank? ||
+        current_account.stripe_subscription_status == "active"
+      
+      flash[:alert] = "This account is currently disabled due to an unpaid subscription."
+      if owner?
+        flash[:alert] += "Please update your payment details to re-activate your subscription."
+      else
+        flash[:alert] += " Please contact the account owner."
+      end
+
+      redirect_to root_url
     end
 
   end

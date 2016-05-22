@@ -2,6 +2,7 @@ module Accounts
   class WebsitesController < Accounts::BaseController
     before_action :set_website, only: [:show, :edit, :update, :destroy]
     before_action :check_plan_limit, only: [:new, :create]
+    skip_before_action :active_subscription_required!, only: [:index]
 
     def index
       @websites = current_account.websites

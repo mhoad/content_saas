@@ -26,6 +26,7 @@ feature 'Accounts' do
 
     choose plan.name
     click_button "Pay"
+    
 
     within_frame("stripe_checkout_app") do
       fill_in "Email", with: "test@example.com"
@@ -50,6 +51,8 @@ feature 'Accounts' do
     
     account.reload
     expect(account.plan).to eq(plan)
+    expect(account.stripe_subscription_id).to be_present
+    expect(account.stripe_subscription_status).to eq("active")
     
     expect(page).to have_content("Signed in as test@example.com")
     expect(page.current_url).to eq(root_url(subdomain: account.subdomain))
