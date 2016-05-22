@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :accounts, only: [:show] do
       collection do
         post :search
+        get :unpaid
       end
     end
   end
