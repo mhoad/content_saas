@@ -8,6 +8,25 @@ require 'capybara/rspec'
 require 'capybara/poltergeist'
 require "email_spec"
 
+#Ensure that Capybara is able to use subdomains correctly
+  Capybara.app_host = "http://lvh.me"
+  
+  #Make sure we give the tests enough time to actually run
+  Capybara.default_max_wait_time = 40
+  
+  #Use poltergeist to ensure we can execute JS
+  
+
+  # Capybara.register_driver :poltergeist do |app|
+  #   # Capybara::Poltergeist::Driver.new(app, options = { debug: true })
+  #   Capybara::Poltergeist::Driver.new(app, {  debug: true,
+  #                                             phantomjs_options: ['--ssl-protocol=any'],
+  #                                             timeout: 240
+  #  })
+  # end
+
+  Capybara.javascript_driver = :poltergeist
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -52,13 +71,4 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-  
-  #Ensure that Capybara is able to use subdomains correctly
-  Capybara.app_host = "http://lvh.me"
-  
-  #Make sure we give the tests enough time to actually run
-  Capybara.default_max_wait_time = 40
-  
-  #Use poltergeist to ensure we can execute JS
-  Capybara.javascript_driver = :poltergeist
 end

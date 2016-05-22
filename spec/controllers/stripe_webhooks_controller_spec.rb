@@ -11,11 +11,6 @@ RSpec.describe StripeWebhooksController, :type => :controller do
       }
     }
     expect(SubscriptionEvent).to receive(:process_webhook).with(type, data)
-    # post :receive, {
-    #   type: type,
-    #   data: data
-    # }
-    # put :switch, params: { plan_id: starter_plan.id }
     post :receive, params: { type: type, data: data }
     expect(response).to be_success
   end

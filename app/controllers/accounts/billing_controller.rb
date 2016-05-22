@@ -8,4 +8,9 @@ class Accounts::BillingController < Accounts::BaseController
     flash[:notice] = "Your payment details have been updated."
     redirect_to billing_path
   end
+
+  def find_customer
+
+  end
+
 end
