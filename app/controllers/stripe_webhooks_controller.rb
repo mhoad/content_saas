@@ -6,7 +6,7 @@ class StripeWebhooksController < ApplicationController
       params[:type],
       params[:data]
     )
-    
+
     head :ok
   end
 end

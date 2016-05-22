@@ -10,7 +10,8 @@ RSpec.describe StripeWebhooksController, :type => :controller do
         object: "subscription"
       }
     }
-    expect(SubscriptionEvent).to receive(:process_webhook).with(type, data)
+
+    expect(SubscriptionEvent).to receive(:process_webhook).with(type, ActionController::Parameters.new(data))
     post :receive, params: { type: type, data: data }
     expect(response).to be_success
   end

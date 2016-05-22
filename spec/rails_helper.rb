@@ -15,15 +15,6 @@ require "email_spec"
   Capybara.default_max_wait_time = 40
   
   #Use poltergeist to ensure we can execute JS
-  
-
-  # Capybara.register_driver :poltergeist do |app|
-  #   # Capybara::Poltergeist::Driver.new(app, options = { debug: true })
-  #   Capybara::Poltergeist::Driver.new(app, {  debug: true,
-  #                                             phantomjs_options: ['--ssl-protocol=any'],
-  #                                             timeout: 240
-  #  })
-  # end
 
   Capybara.javascript_driver = :poltergeist
 
