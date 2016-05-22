@@ -23,6 +23,28 @@ Things you may want to cover:
 
 * ...
 
+In order to get setup you need to run the following commands:
+
+bundle install
+
+rails db:create
+
+rails db:migrate
+
+then check everything is working by running
+
+bundle exec rspec spec
+
+You can also use Guard to automatically run tests for you by running:
+
+bundle exec guard
+
+You will also need to run:
+
+rake import_plans
+
+This will pull down all of the latest plans that you have setup in Stripe at any given time.
+
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

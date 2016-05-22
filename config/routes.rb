@@ -3,6 +3,16 @@ require 'constraints/subdomain_required'
 Rails.application.routes.draw do
   devise_for :users
 
+  namespace :admin do
+    root to: "accounts#index"
+
+    resources :accounts, only: [:show] do
+      collection do
+        post :search
+      end
+    end
+  end
+
   constraints(SubdomainRequired) do
     scope module: "accounts" do
       root to: "websites#index", as: :account_root
