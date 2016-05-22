@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :website do
-    url "http://www.website.com/"
+    url "http://www.#{Faker::Internet.domain_name}/"
     association :account, :factory => [:account, :subscribed]
     
     trait :no_account do

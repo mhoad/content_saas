@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :account do
-    sequence(:name) { |n| "Test Account #{n}" }
-    sequence(:subdomain) { |n| "test#{n}" }
+    name { Faker::Company.name }
+    subdomain { Faker::Internet.domain_word }
     association :owner, :factory => :user
     
     trait :subscribed do

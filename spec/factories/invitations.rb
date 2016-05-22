@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :invitation do
-    sequence(:email) { |n| "newuser#{n}@example.com" }
+  	email { Faker::Internet.email }
     association :account, :factory => :account
   end
 end
