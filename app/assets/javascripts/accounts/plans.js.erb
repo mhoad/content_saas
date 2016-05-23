@@ -2,7 +2,7 @@ $(document).ready(function () {
   if (typeof(StripeCheckout) == 'undefined') { return }
 
   var handler = StripeCheckout.configure({
-    key: 'pk_test_a79pDudJzURBilQTvTHIh7hO',
+    key: '<%= Rails.application.secrets.stripe_api_publishable %>',
     //image: '/images/logo.png',
     locale: 'auto',
     token: function(token) {
